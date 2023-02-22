@@ -7,11 +7,14 @@ const postUsers = async (req,res)=> {
 
         console.log('name,email,phonenumber,password>>>>>>>>', name,email,phonenumber,password)
 
-        const existedUser = User.findAll({email:email})
-        if(existedUser){
-            return res.status(403).json({message: 'Existed'})
+        const userArray = await User.findAll()
+        for(let i=0; i<userArray.length; i++)
+        {
+            if(userArray[i].email === email){
+                return res.json({message: 'Existed'})
+            }
         }
-        else{
+        
             bcrypt.hash(password,10,async(err,hash)=> {
                 const data = await User.create({
                     name: name,
@@ -23,7 +26,7 @@ const postUsers = async (req,res)=> {
                     return res.status(200).json({message: 'User Created', data: data})
                 }
             })
-        }    
+   
     }
     catch(err){
         console.log(err)
