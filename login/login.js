@@ -18,6 +18,8 @@ function onSubmit() {
         if(msg === 'matched')
         {
             alert('Login Successfull')
+            localStorage.setItem('token', response.data.token)
+            window.location.href = '../chat/chatwindow.html'
         }
         else if(msg === 'User not exist'){
             alert('Password incorrect !!')
@@ -26,7 +28,7 @@ function onSubmit() {
             alert('User Not Exist')
         }
         
-        localStorage.setItem('token', response.data.token) 
+         
         
         
     })
