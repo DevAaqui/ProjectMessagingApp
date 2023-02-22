@@ -1,5 +1,6 @@
 const User = require('../model/userModel')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const postUsers = async (req,res)=> {
     try{
@@ -34,6 +35,44 @@ const postUsers = async (req,res)=> {
     
 }
 
+function generateAccesstoken(id){
+    return jwt.sign({userId : id},'dvElG2diDtMN4DQoyEMcCQ7HaAGEuEM4')
+}
+
+const loginUsers = async (req,res,next)=>{
+
+    try{
+        const {email, password} = req.body
+
+        const loginUser = await User.findAll({where: {email}})
+
+        console.log(loginUser)
+
+        if(loginUser.length>0)
+        {
+            bcrypt.compare(password,loginUser[0].password, async(err, result)=> {
+                if(err){
+                    throw new Error('some error occured')
+                }
+                if(result === true){
+                    return res.status(200).json({message: 'matched', success: true, token : generateAccesstoken(loginUser[0].id)})
+                }
+                else{
+                    res.status(401).json({message: 'user not authorized', success: false})
+                }
+            })
+        }
+        else{
+            return res.json({message: 'User not exist'})
+        }
+    }
+    catch(err){
+        console.log(err)
+    }
+    
+}
+
 module.exports = {
-    postUsers
+    postUsers, 
+    loginUsers
 }

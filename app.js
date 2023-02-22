@@ -15,8 +15,7 @@ app.use(bodyParser.json({extended: false}))
 const sequelize = require('./util/database')
 
 app.use(cors({
-    origin: "*",
-    methods: ["GET"],
+    origin: "*"
 }))
 
 app.use(userRoute)
