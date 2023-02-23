@@ -16,6 +16,20 @@ const postChat = async (req, res, next)=> {
     }
 }
 
+const getAllChats = async (req,res)=> {
+    try{
+        const userId = req.user.id
+
+        const messageArray = await Message.findAll({where: {userId}})
+        return res.status(200).json({chatArray:messageArray, success: true})
+    }
+    catch(err){
+        console.log(err)
+    }
+    
+}
+
 module.exports= {
-    postChat
+    postChat,
+    getAllChats
 }
