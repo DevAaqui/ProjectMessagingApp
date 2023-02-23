@@ -16,24 +16,27 @@ function sendFunction(){
     chatbar.value=""
 }
 
-window.addEventListener('DOMContentLoaded',(event) => {
+let intervalId=0
+window.addEventListener('DOMContentLoaded',async (event) => {
     const token = localStorage.getItem('token')
     
+     intervalId = setInterval(()=> {
+        axios.get('http://localhost:3000/chat/chats', { headers: {"Authorization" : token}})
+        .then(response=> {
+            console.log(response.data.chatArray)
+            let array = response.data.chatArray
 
-    axios.get('http://localhost:3000/chat/chats', { headers: {"Authorization" : token}})
-    .then(response=> {
-        console.log(response.data.chatArray)
-        let array = response.data.chatArray
-
-        array.forEach(chat => {
-           addNewine(chat) 
-        });
-    })
-    .catch(err => console.log(err))
-
+            array.forEach(chat => {
+            addNewine(chat) 
+            });
+        })
+        // .then(()=> {
+        //     clearInterval(intervalId)
+        //})
+        .catch(err => console.log(err))
+    },1000) 
     
-
-    
+     
 } )
 
 function addNewine(obj){
@@ -47,4 +50,5 @@ function addNewine(obj){
 function showOnScreen(li){
     let chatlist = document.getElementById('chatlist')
     chatlist.innerHTML = chatlist.innerHTML + li
+    //clearInterval(intervalId)
 }
