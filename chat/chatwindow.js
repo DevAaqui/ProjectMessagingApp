@@ -13,15 +13,38 @@ function sendFunction(){
         console.log(response)
     })
 
+    chatbar.value=""
 }
 
 window.addEventListener('DOMContentLoaded',(event) => {
-    let chatlist = document.getElementById('chatlist')
-    let li = `<li>You: Online</li>`
+    const token = localStorage.getItem('token')
+    
 
-    showOnScreen(li)
+    axios.get('http://localhost:3000/chat/chats', { headers: {"Authorization" : token}})
+    .then(response=> {
+        console.log(response.data.chatArray)
+        let array = response.data.chatArray
+
+        array.forEach(chat => {
+           addNewine(chat) 
+        });
+    })
+    .catch(err => console.log(err))
+
+    
+
+    
 } )
 
+function addNewine(obj){
+    console.log(obj.chat)
+    
+    let li = `<li>You: ${obj.chat}</li>`
+    //parentNode.appendChild(li)
+    showOnScreen(li)
+}
+
 function showOnScreen(li){
+    let chatlist = document.getElementById('chatlist')
     chatlist.innerHTML = chatlist.innerHTML + li
 }
