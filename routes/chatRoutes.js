@@ -12,4 +12,6 @@ router.post('/chat/send', userAuthetication.authenticate, chatController.postCha
 
 router.get('/chat/chats', userAuthetication.authenticate, chatController.getAllChats)
 
+router.get('/chat/nextchat/:chatId', userAuthetication.authenticate, chatController.getNextChat)
+
 module.exports = router

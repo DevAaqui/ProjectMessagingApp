@@ -29,7 +29,32 @@ const getAllChats = async (req,res)=> {
     
 }
 
+const getNextChat = async (req,res)=> {
+    try{
+        const userId = req.user.id
+        const chatId = req.params.chatId //||1
+
+        let nextChatArray = []
+
+        console.log('chatId>>>>>>>>>>>>>',chatId)
+        let messageArray = await Message.findAll()
+        for(let i=0; i<messageArray.length; i++){
+            if(messageArray[i].id > chatId){
+                console.log(messageArray[i].id)
+                nextChatArray.push(messageArray[i])
+            }
+        }
+        //console.log(nextChatArray)
+
+        return res.json({chat:nextChatArray, success: true})
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
 module.exports= {
     postChat,
-    getAllChats
+    getAllChats,
+    getNextChat
 }
