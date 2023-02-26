@@ -1,5 +1,9 @@
 
 
+function createGroupfunction(){
+    window.location.href = "../group/creategroup.html"
+}
+
 function sendFunction(){
     const token = localStorage.getItem('token')
     let chatbar = document.getElementById('chatbar')
