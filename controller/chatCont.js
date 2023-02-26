@@ -3,11 +3,12 @@ const Message = require('../model/messageModel')
 
 const postChat = async (req, res, next)=> {
     try{
-        const {chat} = req.body
+        const {chat,groupId} = req.body
         const userId = req.user.id
         const message = await Message.create({
             chat : chat,
-            userId: userId
+            userId: userId,
+            groupId: groupId
         })
         return res.json({chat:message, success: true})
     }
