@@ -16,6 +16,7 @@ const Member = require('./model/membersModel')
 const userRoute = require('./routes/userRoute')
 const messageRoute = require('./routes/chatRoutes')
 const groupRoute = require('./routes/groupRoutes')
+const adminRoute = require('./routes/adminRoutes')
 
 
 app.use(bodyParser.json({extended: false}))
@@ -29,6 +30,7 @@ app.use(cors({
 app.use(userRoute)
 app.use(messageRoute)
 app.use(groupRoute)
+app.use(adminRoute)
 
 Group.belongsToMany(User, {through: 'User_Group'})
 User.belongsToMany(Group,{through: 'User_Group'})

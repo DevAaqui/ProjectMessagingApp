@@ -8,7 +8,17 @@ const groupCreate = async (req,res,next)=> {
     try{
         let groupId
         const userId = req.user.id
-        const {groupName,member} = req.body //members with email to identify
+        let {groupName,member,admin} = req.body //members with email to identify
+
+        console.log('1st admin>>>>>>>>>',admin)
+
+        if(admin==='Yes'){
+            admin= true
+        }
+        else if(admin ==='No')
+        {
+            admin= false
+        }
 
         const groupFind = await Group.findAll({where: {name: groupName}})
         
@@ -30,16 +40,25 @@ const groupCreate = async (req,res,next)=> {
 
         console.log(mOne[0])
         console.log('>>>>>>>>>>>>',groupId)
-        
-        const newMember1 = await Member.create({
-            name: mOne[0].name,
-            userId: mOne[0].id,
-            groupId: groupId
-        }) 
-        
-        if(newMember1){
-            return res.status(200).json({message: 'Member added to Group', success: true})
+        console.log('2nd Admin>>>>>>>>>>>>>>>>>',admin)
+
+        if(mOne[0] !==undefined){
+            const newMember1 = await Member.create({
+                name: mOne[0].name,
+                admin: admin,
+                userId: mOne[0].id,
+                groupId: groupId
+            }) 
+            
+            if(newMember1){
+                return res.status(200).json({message: 'Member added to Group', success: true})
+            }
+            
         }
+        else{
+            res.status(400).json({success:false})
+        }
+        
         
     }
     catch(err){

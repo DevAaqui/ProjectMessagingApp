@@ -12,6 +12,9 @@ const Member = sequelize.define('member', {
     name: {
         type: Sequelize.STRING 
     },
+    admin: {
+        type: Sequelize.BOOLEAN
+    },
     userId: {
         type: Sequelize.INTEGER
     }
