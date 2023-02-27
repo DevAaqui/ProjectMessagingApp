@@ -9,14 +9,15 @@ function createfunc(e){
     let participant1 = document.getElementById('participant1')
     // let participant2 = document.getElementById('participant2')
     // let participant3 = document.getElementById('participant3')
+    let adminSelect = document.getElementById('adminSelect')
 
     //console.log(group.value,participant1.value,participant2.value,participant3.value)
 
     let groupObj ={
         groupName: group.value,
-        member: participant1.value
-        // member2: participant2.value,
-        // member3: participant3.value
+        member: participant1.value,
+        admin: adminSelect.value
+        
     }
     const token = localStorage.getItem('token')
 
@@ -24,4 +25,11 @@ function createfunc(e){
     .then(response=> {
         console.log(response)
     })
+
+    participant1.value =''
+}
+
+
+function doneFunction(){
+    window.location.href = './grouplist.html'
 }
