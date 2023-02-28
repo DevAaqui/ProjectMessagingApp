@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', (event)=> {
     
     
 
-    axios.get('http://localhost:3000/admin/getadmingroups',{headers: {'Authorization': token}})
+    axios.get('http://100.25.196.230:3000/admin/getadmingroups',{headers: {'Authorization': token}})
     .then(response => {
         let array = response.data.allgroups
         array.forEach(group => {
@@ -29,7 +29,7 @@ function showOnScreen(li){
 function showGroupMembers(groupId){
     const token = localStorage.getItem('token')
 
-    axios.get(`http://localhost:3000/admin/groupmembers/${groupId}`, {headers: {'Authorization': token}})
+    axios.get(`http://100.25.196.230:3000/admin/groupmembers/${groupId}`, {headers: {'Authorization': token}})
     .then(response => {
         console.log(response.data.allMembers)
         let array = response.data.allMembers
@@ -54,7 +54,7 @@ function showMemberOnScreen(li){
 function deleteMember(memberId, adminStatus){
     const token = localStorage.getItem('token')
 
-    axios.delete(`http://localhost:3000/admin/deletemember/${memberId}`,{headers: {'Authorization': token}})
+    axios.delete(`http://100.25.196.230:3000/admin/deletemember/${memberId}`,{headers: {'Authorization': token}})
     .then(response=> {
         console.log(response.message)
     })

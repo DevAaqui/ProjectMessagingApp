@@ -21,7 +21,7 @@ function createfunc(e){
     }
     const token = localStorage.getItem('token')
 
-    axios.post('http://localhost:3000/group/create', groupObj, {headers: {'Authorization': token}})
+    axios.post('http://100.25.196.230:3000/group/create', groupObj, {headers: {'Authorization': token}})
     .then(response=> {
         console.log(response)
     })

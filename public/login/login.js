@@ -11,7 +11,7 @@ function onSubmit() {
         password: loginPassword.value
     }
 
-    axios.post('http://localhost:3000/user/login',loginObject)
+    axios.post('http://100.25.196.230:3000/user/login',loginObject)
     .then(response => {
         console.log(response.data.message)
         let msg = response.data.message

@@ -12,7 +12,7 @@ function sendFunction(){
         chat: chatbar.value
     }
 
-    axios.post('http://localhost:3000/chat/send', chatObj, { headers: {"Authorization" : token }})
+    axios.post('http://100.25.196.230:3000/chat/send', chatObj, { headers: {"Authorization" : token }})
     .then(response => {
         console.log(response)
     })
@@ -36,7 +36,7 @@ window.addEventListener('DOMContentLoaded',async (event) => {
     }
     //console.log(lastKey)
 
-    axios.get(`http://localhost:3000/chat/nextchat/${lastKey}`, {headers: {"Authorization" : token}})
+    axios.get(`http://100.25.196.230:3000/chat/nextchat/${lastKey}`, {headers: {"Authorization" : token}})
     .then(response => {
         console.log(response.data)
         //console.log(response.data.chat)
@@ -54,7 +54,7 @@ window.addEventListener('DOMContentLoaded',async (event) => {
     
     //-------------------------------------------------------------------------------------------------
     //  intervalId = setInterval(()=> {
-    //     axios.get('http://localhost:3000/chat/chats', { headers: {"Authorization" : token}})
+    //     axios.get('http://100.25.196.230:3000/chat/chats', { headers: {"Authorization" : token}})
     //     .then(response=> {
     //         console.log(response.data.chatArray)
     //         let array = response.data.chatArray

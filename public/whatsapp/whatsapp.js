@@ -4,7 +4,7 @@ var userID
 window.addEventListener('DOMContentLoaded', async(event)=> {
     const token = localStorage.getItem('token')
 
-    axios.get('http://localhost:3000/group/allgroup', {headers: {'Authorization': token}})
+    axios.get('http://100.25.196.230:3000/group/allgroup', {headers: {'Authorization': token}})
     .then(response=> {
         console.log(response.data)
         let array = response.data.allgroups
@@ -32,7 +32,7 @@ function showGroupMessages(groupId){
     
     console.log('Inside showgroupmessage fnction')
     localStorage.setItem('gid', groupId)
-    axios.get(`http://localhost:3000/group/getchats/${groupId}`, {headers: {"Authorization" : token}})
+    axios.get(`http://100.25.196.230:3000/group/getchats/${groupId}`, {headers: {"Authorization" : token}})
     .then(response=> {
         console.log('response DAta>>>>',response.data)
         userID = response.data.idOfUser
@@ -76,7 +76,7 @@ function sendMessageFunction(){
         groupId: gid
     }
 
-    axios.post('http://localhost:3000/chat/send', chatObj, { headers: {"Authorization" : token }})
+    axios.post('http://100.25.196.230:3000/chat/send', chatObj, { headers: {"Authorization" : token }})
     .then(response => {
         console.log(response)
     })
